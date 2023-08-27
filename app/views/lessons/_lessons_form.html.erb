@@ -1,0 +1,24 @@
+<%= simple_form_for lesson do |f|  %>
+<div class="container py-5">
+    <%= label_tag :subscribed   %>
+    <%= check_box_tag  :subscribed %>
+    <%= f.hidden_field :package, id: "package_id" %>
+  <div class="row flex-column justify-content-center">
+
+    <div class="col-6 border border-5">
+      <h1>40 Lessons <%= lesson.price * 40 %></h1>
+    </div>
+    <div class="col-6">
+      <h1>20 Lessons <%= lesson.price * 20%></h1>
+    </div>
+    <div class="col-6">
+      <h1>15 Lessons <%= lesson.price * 10%></h1>
+    </div>
+    <div class="col-6">
+      <h1>5 Lessons <%= lesson.price * 5 %></h1>
+      <%= link_to "lessons", lessons_path %>
+    </div>
+  </div>
+    <%= f.submit %>
+</div>
+<%  end %>

@@ -1,0 +1,23 @@
+<%= simple_form_for([@lesson, @lesson_order]) do |f|  %>
+<div class="container py-5">
+    <%= label_tag :subscribed   %>
+    <%= check_box_tag  :subscribed %>
+    <%= f.hidden_field :package, value: 1 %>
+  <div class="row flex-column justify-content-center">
+
+    <div class="col-6 border border-5">
+      <h1>40 Lessons <%= Lesson.all.first.price * 40 %></h1>
+    </div>
+    <div class="col-6">
+      <h1>20 Lessons <%= Lesson.all.first.price * 20%></h1>
+    </div>
+    <div class="col-6">
+      <h1>15 Lessons <%= Lesson.all.first.price * 10%></h1>
+    </div>
+    <div class="col-6">
+      <h1>5 Lessons <%= Lesson.all.first.price * 5 %></h1>
+    </div>
+  </div>
+    <%= f.submit %>
+</div>
+<%  end %>
