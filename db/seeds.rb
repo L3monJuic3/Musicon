@@ -36,6 +36,7 @@ user_one = User.create!(
 lesson = Lesson.create!(
   name: 'Lesson 1',
   description: 'Perfect to get to know the teacher and try it out at low cost',
+  duration: 60,
   price: 15,
   user_id: user_one.id
 )
