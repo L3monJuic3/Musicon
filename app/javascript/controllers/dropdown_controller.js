@@ -2,20 +2,29 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="dropdown"
 export default class extends Controller {
-  static targets = ["dropdownElement"]
+  static targets = ["dropdownButton", "dropdownList", "hiddenDropdown"]
 
-  fire() {
-    // const selectElement = this.dropdownElementTarget
-    // // Delay the modification by 500 milliseconds (adjust as needed)
 
-    // console.log(selectElement.children)
-    // selectElement.classList.remove("optional");
-    // selectElement.classList.remove("select");
-    // selectElement.classList.remove("form-select");
-    // console.log(selectElement.children[0].classList.add("event-drop"))
-    // // selectElement.children[0].style.fontSize = "20px"
-    // selectElement.classList.add("custom-dropdown");
+  fire(event) {
+    const listItem = this.dropdownListTarget
+    const button = this.dropdownButtonTarget
+    // console.log(listItem)
+    // console.log(button)
 
+    const clickedListItem = event.target;
+    console.log(clickedListItem);
+
+    // console.log(selectedText)
+
+    button.innerText = clickedListItem.innerText
+
+    // this.hiddenDropdownTarget.value = button.innerText
+
+    const listValue = Number(button.innerText.split(" ")[0])
+    // console.log(listValue)
+    this.hiddenDropdownTarget.value = listValue
+
+    console.log(this.hiddenDropdownTarget.value)
   }
 
   connect() {
