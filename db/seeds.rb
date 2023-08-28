@@ -45,3 +45,12 @@ until i == 23
   slot1 = Slot.create!(lesson_id: lesson.id, start_time: Time.new(2022, 12, 2, i, 0, 0), end_time: DateTime.new(2022, 12, 2, (i+1), 0, 0) )
   i += 1
 end
+
+
+lesson = Lesson.create!(
+  name: 'Lesson 1',
+  description: 'Perfect to get to know the teacher and try it out at low cost',
+  duration: 90,
+  price: 20,
+  user_id: user_one.id
+)

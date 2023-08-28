@@ -1,5 +1,5 @@
-<%= simple_form_for([@lesson, @lesson_order], data: { controller: "dropdown" }) do |f| %>
-  <div class="container d-flex flex-column py-2 bg-info" style="height: 100vh;">
+<%= simple_form_for([@lesson_order]) do |f| %>
+  <div class="container d-flex flex-column py-2 bg-info" style="height: 100vh;" data-controller="dropdown">
     <h1>Choose your lesson</h1>
 
     <div class="d-flex ">
@@ -15,25 +15,22 @@
     </div>
 
 
-  <div class="btn-group pt-2 bg-light-gray">
-      <button type="button" class="btn col-12 dropdown-toggle" id="dropdown-icon" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+  <div class="btn-group pt-2 bg-light-gray" >
+      <button type="button" data-dropdown-target="dropdownButton" class="btn col-12 dropdown-toggle" id="dropdown-icon" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
         Duration
       </button>
-    <ul class="dropdown-menu dropdown-menu-lg-end col-12">
+    <ul data-dropdown-target="dropdownList" class="dropdown-menu dropdown-menu-lg-end col-12">
     <% @all_lessons.lesson_times.each do |duration| %>
-    <li><a class="dropdown-item" href="#"><%= "#{duration} minutes" %></a></li>
+    <li  data-action="click->dropdown#fire" class="dropdown-item"><%= "#{duration} minutes" %></li>
       <% end %>
     </ul>
   </div>
 
     <div class="mt-5">
-      <% user_input = params[:user_input] # Replace this with actual user input or logic %>
-      <% lessons_with_duration = Lesson.all%>
-      <div id="custom-dropdown">
-        <%= f.hidden_field :lesson_id, as: :select, collection: lessons_with_duration.pluck(:duration, :id).map { |duration, id| "#{duration} minutes" }, include_blank: 'Duration', label: false, style: 'display: block;'%>
-      </div>
+     <%= f.input :custom_hidden_field, as: :hidden, input_html: { value: "your_value_here",  data: { dropdown_target: "hiddenDropdown"} }%>
     </div>
-    <%= f.hidden_field :package, value: 1 %>
+
+      <%= f.hidden_field :package, value: 1 %>
 
     <div class="row flex-column justify-content-center mt-5">
 
