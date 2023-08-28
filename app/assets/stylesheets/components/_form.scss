@@ -1,48 +1,35 @@
-/* Target the checkbox input within .form-check-input and .bigger-checkbox */
-.form-check-input .bigger-checkbox[type="checkbox"] {
-  width: 25px !important;
-  height: 25px;
-  margin-left: 1px;
-  ::after {
-    padding-left: 3px;
-  }
-}
-
-#lesson_order_package .select {
-  margin-left: 50px;
-}
 
 
-@media (max-width: 730px) {
-  .bg-light-gray .select.input select {
-    position: relative;
-    top: 100px;
-    left: 0;
-    // right: 50%;
-    width: 100%;
-  }
-}
-/* Adjust the top position based on your layout */
-.bg-light-gray .select.input select {
-  position: absolute;
-  top: 50%; /* Adjust this value as needed */
-  left: 0;
-  width: 100%;
-}
-
-
-/* Apply display: inline-block to .bigger-checkbox */
-.bigger-checkbox {
-  // display: flex;
-}
 .bigger-checkbox[type="checkbox"] {
   width: 20px !important;
   height: 20px;
 }
 
-/* Adjust the label styles */
+
 .form-check label {
   width: 100px;
   font-size: 13px;
   padding: 5px;
+}
+
+.form-select .dropdown-list{
+  margin-top: 50px !important;
+}
+
+#dropdown-try {
+  display: flex !important;
+}
+
+#dropdown-icon {
+  background-color: $light-gray;
+  color: $text-gray;
+  border: solid 0.1rem $gray;
+  border-radius: 12px;
+  outline-offset: 1rem;
+  box-shadow: 0 0 0 0.2rem;
+}
+
+#dropdown-icon::after {
+  color: $gray;
+  margin-left: 14em !important;
 }
