@@ -26,27 +26,27 @@
     </ul>
   </div>
 
-    <div class="mt-5">
      <%= f.input :custom_hidden_field, as: :hidden, input_html: { value: "your_value_here",  data: { dropdown_target: "hiddenDropdown"} }%>
+
+
+
+    <div class="row flex-column justify-content-center align-items-center" data-dropdown-target="package" data-action="click->dropdown#packageType">
+
+      <div class="col-11 border border-5 bg-light-gray my-2 py-4" id="lesson-package">
+        <h1 class="lesson-text" value="40">40 Lessons <%= @all_lessons.first.price * 40 %></h1>
+      </div>
+      <div class="col-11 border border-5 bg-light-gray my-2 py-4" id="lesson-package">
+        <h1 class="lesson-text" value="20" >20 Lessons <%= @all_lessons.first.price * 20 %></h1>
+      </div>
+      <div class="col-11 border border-5 bg-light-gray my-2 py-4" id="lesson-package">
+        <h1 class="lesson-text" value="15" >15 Lessons <%= @all_lessons.first.price * 10 %></h1>
+      </div>
+      <div class="col-11 border border-5 bg-light-gray my-2 py-4" id="lesson-package">
+        <h1 class="lesson-text" value="5" >5 Lessons <%= @all_lessons.first.price * 5 %></h1>
+      </div>
     </div>
 
-      <%= f.hidden_field :package, value: 1 %>
-
-    <div class="row flex-column justify-content-center mt-5">
-
-      <div class="col-6 border border-5">
-        <h1>40 Lessons <%= Lesson.all.first.price * 40 %></h1>
-      </div>
-      <div class="col-6">
-        <h1>20 Lessons <%= Lesson.all.first.price * 20%></h1>
-      </div>
-      <div class="col-6">
-        <h1>15 Lessons <%= Lesson.all.first.price * 10%></h1>
-      </div>
-      <div class="col-6">
-        <h1>5 Lessons <%= Lesson.all.first.price * 5 %></h1>
-      </div>
-    </div>
-      <%= f.submit %>
+    <%= f.hidden_field :package, value: 1, data: { dropdown_target: "hiddenPackage" } %>
+    <%= f.submit %>
   </div>
 <%  end %>
