@@ -11,6 +11,7 @@ class LessonsController < ApplicationController
     # @slots_available = Slot.available.where(lesson: @lesson.id)
     @lesson = Lesson.find(params[:id])
     @lesson_order = LessonOrder.new
+    @all_lessons = Lesson.all
   end
 
   def new
