@@ -24,7 +24,7 @@ User.destroy_all
 
 puts "Database cleaned"
 
-user_one = User.create!(
+user_one = User.create(
   email: "visitor@musicon.com",
   first_name: "ethan",
   last_name: "lane",
@@ -33,7 +33,7 @@ user_one = User.create!(
   is_admin: true,
 )
 
-lesson = Lesson.create!(
+lesson = Lesson.create(
   name: 'Lesson 1',
   description: 'Perfect to get to know the teacher and try it out at low cost',
   duration: 60,
@@ -42,15 +42,48 @@ lesson = Lesson.create!(
 )
 i = 10
 until i == 23
-  slot1 = Slot.create!(lesson_id: lesson.id, start_time: Time.new(2022, 12, 2, i, 0, 0), end_time: DateTime.new(2022, 12, 2, (i+1), 0, 0) )
+  slot1 = Slot.create(lesson_id: lesson.id, start_time: Time.new(2022, 12, 2, i, 0, 0), end_time: DateTime.new(2022, 12, 2, (i+1), 0, 0) )
   i += 1
 end
 
 
-lesson = Lesson.create!(
+lesson = Lesson.create(
   name: 'Lesson 1',
   description: 'Perfect to get to know the teacher and try it out at low cost',
   duration: 90,
   price: 20,
   user_id: user_one.id
+)
+
+
+
+LessonOrder.create(
+user_id: user_one.id,
+lesson_id: lesson.id,
+package: 1
+)
+
+LessonOrder.create(
+  user_id: user_one.id,
+  lesson_id: lesson.id,
+  package: 5
+)
+
+
+LessonOrder.create(
+  user_id: user_one.id,
+  lesson_id: lesson.id,
+  package: 10
+)
+
+LessonOrder.create(
+  user_id: user_one.id,
+  lesson_id: lesson.id,
+  package: 20
+)
+
+LessonOrder.create(
+  user_id: user_one.id,
+  lesson_id: lesson.id,
+  package: 40
 )

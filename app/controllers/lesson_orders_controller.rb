@@ -7,6 +7,7 @@ class LessonOrdersController < ApplicationController
     @all_lessons = Lesson.all
     @lesson_price = Lesson.all.first.price
     # 1. There is no way to dynamically assign the discount right now.
+    @packages = LessonOrder.all.first(5).pluck(:package).reverse
   end
 
   def show
