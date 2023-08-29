@@ -2,12 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="dropdown"
 export default class extends Controller {
-  static targets = ["dropdownButton", "dropdownList", "hiddenDropdown", "package", "hiddenPackage"]
+  static targets = ["dropdownButton", "dropdownList", "hiddenDropdown", "package", "hiddenPackage", "submitButton"]
 
 
   packageType(event) {
-    const packageNumber = Number(event.target.attributes[0].value)
+    // console.log(Number(event.target.closest("#lesson-package").getAttribute("value")))
+    const packageNumber = Number(event.target.closest("#lesson-package").getAttribute("value"))
     this.hiddenPackageTarget.value = packageNumber
+    // console.log(this.hiddenPackageTarget.value)
+
+    this.submitButtonTarget.click()
+
   }
 
   fire(event) {
@@ -17,6 +22,7 @@ export default class extends Controller {
     button.innerText = clickedListItem.innerText
     const listValue = Number(button.innerText.split(" ")[0])
     this.hiddenDropdownTarget.value = listValue
+    console.log(listValue)
   }
 
   connect() {
