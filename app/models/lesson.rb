@@ -6,7 +6,6 @@ class Lesson < ApplicationRecord
   end
 
   def self.lesson_times
-    # lessons_with_duration.pluck(:duration, :id).map { |duration, id| "#{duration} minutes" }
     Lesson.all.pluck(:duration)
   end
 

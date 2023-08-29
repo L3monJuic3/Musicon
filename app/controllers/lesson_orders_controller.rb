@@ -20,7 +20,6 @@ class LessonOrdersController < ApplicationController
     duration = params[:lesson_order][:custom_hidden_field]
 
     @lesson = Lesson.where(duration: duration).first
-
     filtered_params = lesson_params.except(:custom_hidden_field)
 
     @lesson_order = LessonOrder.new(filtered_params)

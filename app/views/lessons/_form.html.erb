@@ -26,37 +26,37 @@
     </ul>
   </div>
 
-     <%= f.input :custom_hidden_field, as: :hidden, input_html: { value: "your_value_here",  data: { dropdown_target: "hiddenDropdown"} }%>
+     <%= f.input :custom_hidden_field, as: :hidden, input_html: {  data: { dropdown_target: "hiddenDropdown"} }%>
 
 
     <% @packages.each do |package| %>
-      <div class="align-items-center justify-content-center" data-dropdown-target="package" data-action="click->dropdown#packageType">
 
-        <div class="d-flex flex-column col-12 border border-2 bg-light-gray rounded-4 justify-content-center" id="lesson-package" style="margin-bottom: 20px; margin-top: 20px; height: 75px">
+        <div class="align-items-center justify-content-center" >
 
-          <div class="text-center" id="discount-div">
-            <span><%= package %>%</span>
-          </div>
+          <div class="d-flex flex-column col-12 border border-2 bg-light-gray rounded-4 justify-content-center" data-dropdown-target="package" data-action="click->dropdown#packageType" value="<%=package%>" id="lesson-package" style="margin-bottom: 20px; margin-top: 20px; height: 75px">
 
-          <div class="d-flex justify-content-between align-items-center">
-            <span class="lesson-text" value="40"><%= package %> Lessons</span>
-
-            <div class="total-price d-flex flex-column text-center">
-              <%# Applying some arbitrary subscription discount for now %>
-              <div>
-                <span class="monthly-price bg-primary rounded-3">£<%= @all_lessons.round_price((@lesson_price * package) * 0.70)%>/monthly<span>
-              </div>
-              <span class="total-text">Total £<%= @all_lessons.round_price(@lesson_price * package) %></span>
-              <span class="fs-6">£ <%= @all_lessons.round_price((@lesson_price * package) / package) %>/ lesson</span>
+            <div class="text-center" id="discount-div">
+              <span><%= package %>%</span>
             </div>
-            <i class="fa-solid fa-chevron-right" style="font-size: 30px; padding-right: 20px;"></i>
+
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="lesson-text" value="40"><%= package %> Lessons</span>
+
+              <div class="total-price d-flex flex-column text-center">
+                <%# Applying some arbitrary subscription discount for now %>
+                <div>
+                  <span class="monthly-price bg-primary rounded-3">£<%= @all_lessons.round_price((@lesson_price * package) * 0.70)%>/monthly<span>
+                </div>
+                <span class="total-text">Total £<%= @all_lessons.round_price(@lesson_price * package) %></span>
+                <span class="fs-6">£ <%= @all_lessons.round_price((@lesson_price * package) / package) %>/ lesson</span>
+              </div>
+              <i class="fa-solid fa-chevron-right" style="font-size: 30px; padding-right: 20px;"></i>
+            </div>
+
           </div>
-
-        </div>
       <% end %>
-
-    <%= f.hidden_field :package, value: 1, data: { dropdown_target: "hiddenPackage" } %>
-    <%= f.submit %>
+        <%= f.hidden_field :package, value: 1, data: { dropdown_target: "hiddenPackage" } %>
+        <%= f.button :submit, data: { dropdown_target: "submitButton"}%>
   </div>
 
 <%  end %>
