@@ -42,6 +42,10 @@
           <span class="lesson-text" value="40">40 Lessons</span>
 
           <div class="total-price d-flex flex-column text-center">
+            <%# Applying some arbitrary subscription discount for now %>
+            <div>
+              <span class="monthly-price bg-primary rounded-3">£<%= @all_lessons.round_price((@lesson_price * 40) * 0.70)%>/monthly<span>
+            </div>
             <span class="total-text">Total £<%= @all_lessons.round_price(@lesson_price * 40) %></span>
             <span class="fs-6">£ <%= @all_lessons.round_price((@lesson_price * 40) / 40) %>/ lesson</span>
           </div>
