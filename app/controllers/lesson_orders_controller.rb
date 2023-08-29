@@ -5,6 +5,7 @@ class LessonOrdersController < ApplicationController
     @lesson_orders = LessonOrder.all
     @lesson_order = LessonOrder.new
     @all_lessons = Lesson.all
+    @lesson_price = Lesson.all.first.price
     # 1. There is no way to dynamically assign the discount right now.
   end
 
