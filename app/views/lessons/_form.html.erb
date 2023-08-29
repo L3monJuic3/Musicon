@@ -30,12 +30,26 @@
 
 
 
-    <div class="row flex-column justify-content-center align-items-center" data-dropdown-target="package" data-action="click->dropdown#packageType">
+    <div class="align-items-center justify-content-center" data-dropdown-target="package" data-action="click->dropdown#packageType">
 
-      <div class="col-11 border border-5 bg-light-gray my-2 py-4" id="lesson-package">
-        <p><p>
-        <h1 class="lesson-text" value="40">40 Lessons <%= @all_lessons.first.price * 40 %></h1>
+      <div class="d-flex flex-column col-12 border border-5 bg-light-gray h-25" id="lesson-package">
+
+        <div class="bg-danger col-2 h-25 text-center" id="discount-div">
+          <span>20%</span>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <span class="lesson-text" value="40">40 Lessons</span>
+
+          <div class="total-price d-flex flex-column">
+            <span>Total <%= @all_lessons.first.price * 40 %></span>
+            <span><%= (@all_lessons.first.price * 40) / 40 %> / lesson</span>
+          </div>
+          <i class="fa-solid fa-chevron-right" style="font-size: 30px"></i>
+        </div>
+
       </div>
+
       <div class="col-11 border border-5 bg-light-gray my-2 py-4" id="lesson-package">
         <h1 class="lesson-text" value="20" >20 Lessons <%= @all_lessons.first.price * 20 %></h1>
       </div>
