@@ -41,11 +41,11 @@
         <div class="d-flex justify-content-between align-items-center">
           <span class="lesson-text" value="40">40 Lessons</span>
 
-          <div class="total-price d-flex flex-column">
-            <span>Total <%= @all_lessons.first.price * 40 %></span>
-            <span><%= (@all_lessons.first.price * 40) / 40 %> / lesson</span>
+          <div class="total-price d-flex flex-column text-center">
+            <span class="total-text">Total £<%= @all_lessons.round_price(@lesson_price * 40) %></span>
+            <span class="fs-6">£ <%= @all_lessons.round_price((@lesson_price * 40) / 40) %>/ lesson</span>
           </div>
-          <i class="fa-solid fa-chevron-right" style="font-size: 30px"></i>
+          <i class="fa-solid fa-chevron-right" style="font-size: 30px; padding-right: 20px;"></i>
         </div>
 
       </div>
