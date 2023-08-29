@@ -15,7 +15,7 @@
     </div>
 
 
-  <div class="btn-group pt-2 bg-light-gray">
+  <div class="btn-group pt-2 bg-light-gray" style="margin-bottom: -12px;">
       <button type="button" data-dropdown-target="dropdownButton" class="btn col-12 dropdown-toggle" id="dropdown-icon" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
         Duration
       </button>
@@ -30,9 +30,9 @@
 
 
     <% @packages.each do |package| %>
-      <div class="align-items-center justify-content-center py-2" data-dropdown-target="package" data-action="click->dropdown#packageType">
+      <div class="align-items-center justify-content-center" data-dropdown-target="package" data-action="click->dropdown#packageType">
 
-        <div class="d-flex flex-column col-12 border border-2 bg-light-gray h-25 rounded-4 py-4" id="lesson-package">
+        <div class="d-flex flex-column col-12 border border-2 bg-light-gray rounded-4 justify-content-center" id="lesson-package" style="margin-bottom: 20px; margin-top: 20px; height: 75px">
 
           <div class="text-center" id="discount-div">
             <span><%= package %>%</span>
