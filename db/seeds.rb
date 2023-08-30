@@ -33,6 +33,15 @@ user_one = User.create(
   is_admin: true,
 )
 
+user_two = User.create(
+  email: "visitor@lewagon.com",
+  first_name: "Peter",
+  last_name: "lane",
+  password: "123456789",
+  phone_number: "07397282826",
+  is_admin: true
+)
+
 lesson = Lesson.create(
   name: 'Lesson 1',
   description: 'Perfect to get to know the teacher and try it out at low cost',
