@@ -5,6 +5,13 @@ export default class extends Controller {
   static targets = ["dropdownButton", "dropdownList", "hiddenDropdown", "package", "hiddenPackage", "submitButton"]
 
 
+  lessonFormSubmit(event) {
+    console.log(this.hiddenDropdownTarget)
+    console.log(!this.hiddenDropdownTarget.value)
+    // if ()
+    event.preventDefault()
+  }
+
   packageType(event) {
     // console.log(Number(event.target.closest("#lesson-package").getAttribute("value")))
     const packageNumber = Number(event.target.closest("#lesson-package").getAttribute("value"))
