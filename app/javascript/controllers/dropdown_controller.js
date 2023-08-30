@@ -2,14 +2,26 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="dropdown"
 export default class extends Controller {
-  static targets = ["dropdownButton", "dropdownList", "hiddenDropdown", "package", "hiddenPackage", "submitButton"]
+  static targets = ["dropdownButton",
+                    "dropdownList",
+                    "hiddenDropdown",
+                    "package",
+                    "hiddenPackage",
+                    "submitButton",
+                    "durationField"]
 
 
   lessonFormSubmit(event) {
-    console.log(this.hiddenDropdownTarget)
-    console.log(!this.hiddenDropdownTarget.value)
-    // if ()
     event.preventDefault()
+    // console.log(this.hiddenDropdownTarget)
+    const hiddenDuration = !this.hiddenDropdownTarget.value
+    console.log(this.dropdownButtonTarget.attributes.id.value)
+    if (hiddenDuration) {
+      event.preventDefault()
+      this.dropdownButtonTarget.attributes.id.value = "input-error"
+      // this.dropdownButtonTarget.classList.add("#input-error")
+    }
+
   }
 
   packageType(event) {

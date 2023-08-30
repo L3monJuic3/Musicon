@@ -90,3 +90,32 @@
 
 
 /* Rectangle 2004 */
+
+#input-error {
+  background-color: $light-gray;
+  color: $text-gray;
+  border: solid 0.1rem $gray;
+  border-radius: 12px;
+  outline-offset: 1rem;
+  box-shadow:0px 4px 6px 0 rgba(0,0,0,0.16);
+  border-color: red;
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  // margin-left: 10px;
+
+  ::after {
+    color: $gray;
+    margin-left: 14em !important;
+  }
+}
+
+#input-error button {
+  padding: 10px;
+}
+
+
+#input-error::after {
+  color: $gray;
+  margin-left: 14em !important;
+}
