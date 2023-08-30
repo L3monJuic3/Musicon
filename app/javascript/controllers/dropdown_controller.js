@@ -12,33 +12,55 @@ export default class extends Controller {
 
   lessonFormSubmit(event) {
 
-    event.preventDefault()
-    // console.log(this.hiddenDropdownTarget)
-    const hiddenDuration = !this.hiddenDropdownTarget.value
+    const hiddenDuration = this.hiddenDropdownTarget.value
     const durationButton = this.dropdownButtonTarget
+    const errorMessageText = document.querySelector("#duration-error-message")
 
-    if (hiddenDuration) {
+    if (!hiddenDuration) {
       event.preventDefault()
       durationButton.attributes.id.value = "input-error"
-      const errorMessageText = document.querySelector("#duration-error-message")
+    }
 
-      if (!errorMessageText) {
-        durationButton.closest("#button-div").insertAdjacentHTML("beforebegin", '<span class="error-red-text" id="duration-error-message">Field cannot be empty</span>')
-        durationButton.closest("#button-div").classList.remove("pt-2")
-      }
+    if (!errorMessageText) {
+      event.preventDefault()
+      durationButton.closest("#button-div").insertAdjacentHTML("beforebegin", '<span class="error-red-text" id="duration-error-message">Field cannot be empty</span>')
+      durationButton.closest("#button-div").classList.remove("pt-2")
 
     }
-      // this.dropdownButtonTarget.classList.add("#input-error")
-
   }
 
   packageType(event) {
-    // console.log(Number(event.target.closest("#lesson-package").getAttribute("value")))
-    const packageNumber = Number(event.target.closest("#lesson-package").getAttribute("value"))
-    this.hiddenPackageTarget.value = packageNumber
-    // console.log(this.hiddenPackageTarget.value)
+    const packageDiv = event.target.closest("#lesson-package");
 
-    this.submitButtonTarget.click()
+    if (packageDiv) {
+      const packageNumber = Number(packageDiv.getAttribute("value"));
+      this.hiddenPackageTarget.value = packageNumber;
+      console.log(this.hiddenPackageTarget.value)
+      this.submitButtonTarget.click();
+    } else {
+      const singlePackage = Number(event.target.closest("div").getAttribute("value"));
+      this.hiddenPackageTarget.value = singlePackage;
+      this.submitButtonTarget.click();
+    }
+    // const packageDiv = event.target.closest("#lesson-package")
+    // // console.log(packageDiv.getAttribute("value"))
+    // let packageValue = this.hiddenPackageTarget.value
+    // console.log(packageDiv)
+    // if (packageDiv){
+    //   const packageNumber = Number(packageDiv.getAttribute("value"))
+    //   packageValue = packageNumber
+    //   console.log(typeof packageValue)
+    //   // const package = parseInt(packageNumber, 10)
+    //   // console.log(typeof package)
+    //   // Check duration dropdown box
+    //   this.submitButtonTarget.click()
+    // } else {
+    //   const singlePackage = Number(event.target.closest("div").getAttribute("value"))
+
+    //   this.hiddenPackageTarget.value = singlePackage
+    //   this.submitButtonTarget.click()
+    // }
+
 
   }
 
@@ -49,7 +71,7 @@ export default class extends Controller {
     button.innerText = clickedListItem.innerText
     const listValue = Number(button.innerText.split(" ")[0])
     this.hiddenDropdownTarget.value = listValue
-    console.log(listValue)
+
   }
 
   connect() {

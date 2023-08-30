@@ -21,12 +21,10 @@ class LessonOrdersController < ApplicationController
 
     @lesson = Lesson.where(duration: duration).first
     filtered_params = lesson_params.except(:custom_hidden_field)
-
     @lesson_order = LessonOrder.new(filtered_params)
 
     @lesson_order.user_id = current_user.id
     @lesson_order.lesson_id = @lesson.id
-
     current_user.subscribed = true if @lesson_order.is_subscribed == true
     current_user.save
 
