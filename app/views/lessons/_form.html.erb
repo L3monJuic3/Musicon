@@ -26,7 +26,7 @@
     </ul>
   </div>
 
-     <%= f.input :custom_hidden_field, as: :hidden, input_html: {  data: { dropdown_target: "hiddenDropdown"} }%>
+     <%= f.input :custom_hidden_field, as: :hidden, input_html: { value: "", data: { dropdown_target: "hiddenDropdown"} }%>
 
 
     <% @packages.each do |package| %>
@@ -56,7 +56,7 @@
           </div>
       <% end %>
         <%= f.hidden_field :package, value: 1, data: { dropdown_target: "hiddenPackage" } %>
-        <%= f.button :submit, data: { dropdown_target: "submitButton"}%>
+        <%= f.button :submit, data: { dropdown_target: "submitButton", action: "click->dropdown#lessonFormSubmit" }, style: "visibility:hidden;"%>
   </div>
 
 <%  end %>
