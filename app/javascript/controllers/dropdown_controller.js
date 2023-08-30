@@ -10,17 +10,25 @@ export default class extends Controller {
                     "submitButton",
                     "durationField"]
 
-
   lessonFormSubmit(event) {
+
     event.preventDefault()
     // console.log(this.hiddenDropdownTarget)
     const hiddenDuration = !this.hiddenDropdownTarget.value
-    console.log(this.dropdownButtonTarget.attributes.id.value)
+    const durationButton = this.dropdownButtonTarget
+
     if (hiddenDuration) {
       event.preventDefault()
-      this.dropdownButtonTarget.attributes.id.value = "input-error"
-      // this.dropdownButtonTarget.classList.add("#input-error")
+      durationButton.attributes.id.value = "input-error"
+      const errorMessageText = document.querySelector("#duration-error-message")
+
+      if (!errorMessageText) {
+        durationButton.closest("#button-div").insertAdjacentHTML("beforebegin", '<span class="error-red-text" id="duration-error-message">Field cannot be empty</span>')
+        durationButton.closest("#button-div").classList.remove("pt-2")
+      }
+
     }
+      // this.dropdownButtonTarget.classList.add("#input-error")
 
   }
 
