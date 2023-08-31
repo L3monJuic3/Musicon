@@ -33,7 +33,7 @@
       <% if package > 1 %>
         <div class="align-items-center justify-content-center" >
 
-          <div class="d-flex flex-column col-12 border border-2 bg-light-gray rounded-4 justify-content-center" data-dropdown-target="package" data-action="click->dropdown#packageType" value="<%=package%>" id="lesson-package" style="margin-bottom: 10px; margin-top: 10px; height: 75px">
+          <div class="d-flex flex-column col-12 border border-2 bg-light-gray rounded-4 justify-content-center" data-dropdown-target="package" data-action="click->dropdown#packageType" value="<%=package%>" id="lesson-package" style="margin-bottom: 15px; margin-top: 15px; height: 75px">
 
             <div class="text-center" id="discount-div">
               <span><%= package %>%</span>
@@ -60,7 +60,7 @@
         </div>
         <% else %>
 
-        <div class="text-center text-primary text-decoration-underline" data-dropdown-target="package" data-action="click->dropdown#packageType" value="<%=package%>">
+        <div class="text-center text-primary text-decoration-underline mt-3" data-dropdown-target="package" data-action="click->dropdown#packageType" value="<%=package%>">
           <strong>Choose a single lesson for <%= @all_lessons.round_price(@lesson_price) %></strong>
         </div>
 
