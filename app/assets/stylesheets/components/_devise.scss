@@ -13,9 +13,11 @@
   color: $text-gray;
   text-decoration: none;
 
-  span {
-    color: $text-gray;
-    font-style: italic;
-    text-decoration: underline;
-  }
+
+}
+
+.account-login_two span:nth-of-type(2) {
+  color: $text-gray;
+  font-style: italic;
+  text-decoration: underline;
 }
