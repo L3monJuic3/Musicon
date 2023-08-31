@@ -1,0 +1,21 @@
+.account-login {
+  text-decoration: none;
+  color: $gray;
+}
+
+.login-word {
+  color: $primary;
+  border-bottom: solid 2px;
+}
+
+
+.account-login_two {
+  color: $text-gray;
+  text-decoration: none;
+
+  span {
+    color: $text-gray;
+    font-style: italic;
+    text-decoration: underline;
+  }
+}
