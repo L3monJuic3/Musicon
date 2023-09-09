@@ -6,13 +6,24 @@ RSpec.describe LessonOrder, type: :model do
   let(:lesson_order) { LessonOrder.new(user_id: user.id, lesson_id: lesson.id, discount: 20, package: 20)}
   # let(:booking) { Booking.new(date: Date.new, status: "pending", lesson_order_id: lesson_order.id)}
   describe "validations" do
-    it { should validate_presence_of(:discount) }
-    it { should validate_presence_of(:package) }
+    it "should have a discount" do
+      should validate_presence_of(:discount)
+    end
+
+    it "should have a lesson package" do
+      should validate_presence_of(:package)
+    end
   end
 
   describe "associations" do
-    it { should belong_to(:user) }
-    it { should belong_to(:lesson) }
-    it { should have_many(:bookings) }
+    it "should belong to a user" do
+      should belong_to(:user)
+    end
+    it "should belong to a lesson" do
+      should belong_to(:lesson)
+    end
+    it "should have many bookings" do
+      should have_many(:bookings)
+    end
   end
 end

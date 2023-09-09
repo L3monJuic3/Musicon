@@ -5,7 +5,7 @@ class LessonOrder < ApplicationRecord
   belongs_to :lesson
 
 
-
+  # validates :discount, presence: true
   # validate :validate_custom_hidden_field
 
   # def self.validate_custom_hidden_field(custom_hidden_field)

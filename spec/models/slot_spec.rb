@@ -8,8 +8,12 @@ RSpec.describe Slot, type: :model do
 
   # slots cannot have the same start_time under the same booking_id
   describe "validations" do
-    it { should validate_presence_of(:start_time) }
-    it { should validate_presence_of(:end_time) }
+    it "should have a start_time" do
+      should validate_presence_of(:start_time)
+    end
+    it "should have a end_time" do
+      should validate_presence_of(:end_time)
+    end
 
     it 'validates the uniqueness of start_time per booking_date' do
       slot_2 = Slot.create(start_time: '08:00:00', end_time: '09:00:00', lesson_id: lesson.id )
@@ -20,7 +24,12 @@ RSpec.describe Slot, type: :model do
   end
 
   describe "associations" do
-    it { should belong_to(lesson) }
-    it { should have_many(:bookings).through(:booking_slots) }
+    # it { should belong_to(lesson) }
+    it "should belong to a lesson" do
+      should belong_to(:lesson)
+    end
+    it "should have many bookings through booking_slots" do
+      should have_many(:bookings).through(:booking_slots)
+    end
   end
 end
