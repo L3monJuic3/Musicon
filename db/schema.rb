@@ -10,21 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_162425) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_09_09_143045) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "booking_slots", force: :cascade do |t|
+    t.bigint "booking_id", null: false
+    t.bigint "slot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_booking_slots_on_booking_id"
+    t.index ["slot_id"], name: "index_booking_slots_on_slot_id"
+  end
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "booking_date"
     t.boolean "status"
-    t.bigint "slot_id", null: false
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["slot_id"], name: "index_bookings_on_slot_id"
-    t.index ["user_id"], name: "index_bookings_on_user_id"
+    t.bigint "lesson_order_id", null: false
+    t.index ["lesson_order_id"], name: "index_bookings_on_lesson_order_id"
   end
 
   create_table "lesson_orders", force: :cascade do |t|
@@ -82,8 +87,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_162425) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "bookings", "slots"
-  add_foreign_key "bookings", "users"
+  add_foreign_key "booking_slots", "bookings"
+  add_foreign_key "booking_slots", "slots"
+  add_foreign_key "bookings", "lesson_orders"
   add_foreign_key "lesson_orders", "lessons"
   add_foreign_key "lesson_orders", "users"
   add_foreign_key "lessons", "users"
