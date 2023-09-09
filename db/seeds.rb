@@ -12,6 +12,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require 'date'
 
 puts "Cleaning up database..."
 
@@ -24,14 +25,16 @@ User.destroy_all
 
 puts "Database cleaned"
 
-user_one = User.create(
+user_one = User.create!(
   email: "visitor@musicon.com",
   first_name: "ethan",
   last_name: "lane",
   password: "123456789",
   phone_number: "07397282826",
   is_admin: true,
+  date_of_birth: Date.new
 )
+user_one.save
 
 user_two = User.create(
   email: "visitor@lewagon.com",
