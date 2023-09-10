@@ -87,3 +87,6 @@ end
 # Stripe api
 gem 'money-rails'
 gem 'stripe'
+
+# Fake data
+gem 'faker'
