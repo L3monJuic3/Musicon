@@ -61,6 +61,6 @@ FactoryBot.define do
     description { "Intro lesson" }
     price { 55.00 }
     duration { 60 }
-    association :user, factory: [:user, :admin]
+    association :user, factory: [:user]
   end
 end
