@@ -1,15 +1,24 @@
 require 'rails_helper'
 
-RSpec.describe LessonsController, type: :controller do
-  include Devise::Test::ControllerHelpers
+RSpec.describe LessonsController, type: :request do
+  let!(:user) { create(:user, :admin, :phone_number) }
+  let!(:lesson) { create(:lesson, user: user) }
+  let!(:lesson2) { create(:lesson, user: user) }
 
-  let(:user) { User.all.first }
-  let(:lesson) { Lesson.create(name: "Lesson 1", description: "Intro lesson", price: 45.00, duration: 60, user_id: user.id) }
+  before do
+    sign_in user
+  end
 
   describe "GET #index" do
     it "should return a succesful response" do
-      sign_in user
-      get :index
+      get lessons_path
+      expect(response).to have_http_status(:success)
+    end
+
+    it "should have @lessons instance variable for all lessons" do
+      get lessons_path
+      # Bit of a hack to get controller instance but I will take it!
+      expect(@controller.instance_variable_get('@lessons')).to eq([lesson, lesson2])
       expect(response).to have_http_status(:success)
     end
   end

@@ -3,9 +3,11 @@ require 'rails_helper'
 RSpec.describe Lesson, type: :model do
   # let(:user) { User.create(email: "test@email.com", password: "123456", phone_number: "07397282826", date_of_birth: Date.new) }
   # let(:lesson) {Lesson.new(name: "lesson_1", description: "intro_lesson", price: 45.00, duration: 60, user_id: user.id )}
-  let(:lesson) { create(:lesson, :user) }
-  # let(:user) { create(:user) }
-  let(:lesson_2) { create(:lesson, :user, :admin_user)}
+  let(:user) { FactoryBot.create(:user, :phone_number) }
+  let(:user_admin) { FactoryBot.create(:user, :admin, :phone_number) }
+
+  let(:lesson) { create(:lesson, user: user) }
+  let(:lesson_2) { create(:lesson, user: user_admin)}
 
   describe "validations" do
     it "should only be able to create a lesson as administrator" do
@@ -27,14 +29,11 @@ RSpec.describe Lesson, type: :model do
     end
 
     it "validates uniqueness of lesson name within the same user" do
-      lesson_two = Lesson.new(name: "lesson_1", user_id: user.id)
-      expect(lesson).to be_valid
-      expect(lesson_two).not_to be_valid
-      expect(lesson_two.errors[:name]).to include('should be unique for each user')
-    end
-
-    it "only able to create a lesson if user is administrator" do
-      expect(lesson).not_to be_valid
+      lesson_3 = Lesson.new(name: "lesson_1", user_id: user.id)
+      lesson_4 = Lesson.new(name: "lesson_1", user_id: user.id)
+      expect(lesson_3).to be_valid
+      expect(lesson_4).not_to be_valid
+      expect(lesson_4.errors[:name]).to include('should be unique for each user')
     end
   end
 

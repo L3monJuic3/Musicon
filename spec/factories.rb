@@ -1,12 +1,12 @@
 # This will guess the User class
 require 'date'
-
+require 'faker'
 FactoryBot.define do
 
   factory :user do
-    first_name { "John" }
-    last_name { "Doe" }
-    email { "ethan5@musicon.com" }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name  }
+    email { "#{first_name}@musicon.com" }
     password { "123456" }
     date_of_birth { Date.new }
 
@@ -20,7 +20,7 @@ FactoryBot.define do
   end
 
   factory :lesson do
-    name { "Lesson 2" }
+    name { Faker::ProgrammingLanguage.name  }
     description { "Intro lesson" }
     price { 55.00 }
     duration { 60 }

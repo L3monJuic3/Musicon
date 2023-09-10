@@ -3,9 +3,8 @@ require 'date'
 
 RSpec.describe Booking, type: :model do
   let(:user) { create(:user) }
-  let(:lesson) { create(:lesson) }
-  let(:lesson_order) { create(:lesson_order) }
-  let(:booking) { create(:booking) }
+  let(:lesson_order) { create(:lesson_order, user: user) }
+  let(:booking) { create(:booking, lesson_order: lesson_order) }
 
   describe "validations" do
     it "should have a booking date" do

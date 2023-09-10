@@ -1,12 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Slot, type: :model do
-  let(:user) { User.create(email: "test@email.com", password: "123456", phone_number: "07397282826", date_of_birth: Date.new) }
-  let(:lesson) { Lesson.create(name: "lesson_1", description: "intro_lesson", price: 45.00, duration: 60, user_id: user.id )}
-  let(:slot) { Slot.create(start_time: '08:00:00', end_time: '09:00:00', lesson_id: lesson.id ) }
-  let(:booking) { Booking.create(booking_date: '2023-09-10', lesson_order_id: lesson_order.id ) }
+  let(:user) { create(:user, :phone_number) }
+  let(:user_admin) { create(:user, :admin, :phone_number) }
 
-  # slots cannot have the same start_time under the same booking_id
+  let(:lesson) { create(:lesson, user: user_admin) }
+  let(:lesson_2) { create(:lesson, user: user) }
+
+  let(:slot) { create(:slot, lesson: lesson) }
+  let(:slot_2) { create(:slot, lesson: lesson_2)}
+
   describe "validations" do
     it "should have a start_time" do
       should validate_presence_of(:start_time)
@@ -23,7 +26,8 @@ RSpec.describe Slot, type: :model do
     end
 
     it "should only be able to create a slot if user is administrator" do
-      expect(slot).to_not be_valid
+      expect(slot_2).not_to be_valid
+      expect(slot).to be_valid
     end
   end
 
