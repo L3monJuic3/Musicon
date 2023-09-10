@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { User.new(email: "test@email.com", password: "123456", phone_number: "07397282826", date_of_birth: Date.new) }
+  # let(:user) { User.new(email: "test@email.com", password: "123456", phone_number: "07397282826", date_of_birth: Date.new) }
+  let(:user) { create(:user, :phone_number) }
+  let(:user_admin) { create(:user, :admin, :phone_number) }
+  let(:user_three) { create(:user) }
 
   describe 'validations' do
     it "should have an email present" do
@@ -30,6 +33,11 @@ RSpec.describe User, type: :model do
     it "validates is_subcribed defaults to false or nil" do
       # valid_is_subscribed = [nil, false
       expect(user.subscribed).to user.subscribed.nil? ? eq(nil) : eq(false)
+    end
+
+    it "should check administrator privledges" do
+      expect(user.is_admin).to eq(nil)
+      expect(user_admin.is_admin).to eq(true)
     end
   end
 
