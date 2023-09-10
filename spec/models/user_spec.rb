@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { User.new(email: "test@email.com", password: "123456", phone_number: "07397282826", date_of_birth: Date.new) }
+  # let(:user) { User.new(email: "test@email.com", password: "123456", phone_number: "07397282826", date_of_birth: Date.new) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:user_two) { FactoryBot.create(:user) }
 
   describe 'validations' do
     it "should have an email present" do

@@ -21,6 +21,10 @@ RSpec.describe Slot, type: :model do
       expect(slot_2).not_to be_valid
       expect(slot_2.errors[:start_time]).to include('has already been taken')
     end
+
+    it "should only be able to create a slot if user is administrator" do
+      expect(slot).to_not be_valid
+    end
   end
 
   describe "associations" do

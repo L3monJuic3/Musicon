@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Lesson, type: :model do
-  let(:user) { User.create(email: "test@email.com", password: "123456", phone_number: "07397282826", date_of_birth: Date.new) }
-  let(:lesson) {Lesson.new(name: "lesson_1", description: "intro_lesson", price: 45.00, duration: 60, user_id: user.id )}
-
+  # let(:user) { User.create(email: "test@email.com", password: "123456", phone_number: "07397282826", date_of_birth: Date.new) }
+  # let(:lesson) {Lesson.new(name: "lesson_1", description: "intro_lesson", price: 45.00, duration: 60, user_id: user.id )}
+  let(:lesson) { create(:lesson) }
+  let(:user) { create(:user) }
   describe "validations" do
     it "should have a name" do
       should validate_presence_of(:name)
@@ -24,6 +25,10 @@ RSpec.describe Lesson, type: :model do
       expect(lesson).to be_valid
       expect(lesson_two).not_to be_valid
       expect(lesson_two.errors[:name]).to include('should be unique for each user')
+    end
+
+    it "only able to create a lesson if user is administrator" do
+      expect(lesson).not_to be_valid
     end
   end
 
