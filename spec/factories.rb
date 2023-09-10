@@ -24,7 +24,7 @@ FactoryBot.define do
     description { "Intro lesson" }
     price { 55.00 }
     duration { 60 }
-    association :user, factory: :user
+    association :user, factory: [:user, :admin]
   end
 
   factory :lesson_order do
@@ -45,5 +45,22 @@ FactoryBot.define do
     end_time { '09:00:00' }
     is_available { true }
     association :lesson, factory: :lesson
+  end
+
+
+  # Invalid factory builds
+  factory :invalid_lesson, class: Lesson do
+    name { nil }
+    price { 521 }
+    duration { 1000 }
+    # other attributes that make it invalid
+  end
+
+  factory :lesson_no_admin, class: Lesson do
+    name { Faker::ProgrammingLanguage.name  }
+    description { "Intro lesson" }
+    price { 55.00 }
+    duration { 60 }
+    association :user, factory: [:user, :admin]
   end
 end
