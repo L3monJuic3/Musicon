@@ -10,7 +10,7 @@ RSpec.describe LessonsController, type: :request do
   end
 
   describe "GET #index" do
-    it "should return a succesful response" do
+    it "should return a succesful http response" do
       get lessons_path
       expect(response).to have_http_status(:success)
     end
@@ -20,6 +20,18 @@ RSpec.describe LessonsController, type: :request do
       # Bit of a hack to get controller instance but I will take it!
       expect(@controller.instance_variable_get('@lessons')).to eq([lesson, lesson2])
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "GET #show" do
+    it "should return a succesful http response" do
+      get lesson_path(lesson)
+      expect(response).to have_http_status(:success)
+    end
+
+    it "should return a specific instance of lesson" do
+      get lesson_path(lesson)
+      expect(@controller.instance_variable_get("@lesson")).to eq(lesson)
     end
   end
 end

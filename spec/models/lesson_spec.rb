@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Lesson, type: :model do
   # let(:user) { User.create(email: "test@email.com", password: "123456", phone_number: "07397282826", date_of_birth: Date.new) }
   # let(:lesson) {Lesson.new(name: "lesson_1", description: "intro_lesson", price: 45.00, duration: 60, user_id: user.id )}
-  let(:user) { FactoryBot.create(:user, :phone_number) }
-  let(:user_admin) { FactoryBot.create(:user, :admin, :phone_number) }
+  let(:user) { create(:user, :phone_number) }
+  let(:user_admin) { create(:user, :admin, :phone_number) }
 
   let(:lesson) { create(:lesson, user: user) }
   let(:lesson_2) { create(:lesson, user: user_admin)}
