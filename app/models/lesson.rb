@@ -1,6 +1,8 @@
 class Lesson < ApplicationRecord
   belongs_to :user
 
+  validates :name, presence: true
+
   def self.lesson_duration
     " minutes"
   end
