@@ -66,6 +66,15 @@ RSpec.configure do |config|
   # config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers
   config.include FactoryBot::Syntax::Methods
+
+  config.before(:each) do
+    @stripe_test_helper = StripeMock.create_test_helper
+    StripeMock.start
+  end
+
+  config.after(:each) do
+      StripeMock.stop
+    end
 end
 
 # Shoulda Matches gem configuration

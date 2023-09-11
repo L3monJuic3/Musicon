@@ -13,8 +13,8 @@ class User < ApplicationRecord
 
   # validates :password, presence: true
   # validates :password, length: { in: 6..20 }
-  validates :phone_number, format: { with: /\A(\+44\s?7\d{3}|\(?07\d{3}\)?)\s?\d{3}\s?\d{3}$/,
-                                     message: "valid uk phone number", multiline: true }
+  # validates :phone_number, format: { with: /\A(\+44\s?7\d{3}|\(?07\d{3}\)?)\s?\d{3}\s?\d{3}$/,
+  #                                    message: "valid uk phone number", multiline: true }
 
   def self.lesson_orders(user_id)
     LessonOrder.where(user_id: user_id)
