@@ -93,3 +93,6 @@ gem 'stripe'
 
 # Fake data
 gem 'faker'
+
+# Mock stripe api test gem
+gem 'stripe-ruby-mock', '~> 3.0.1', :require => 'stripe_mock'
