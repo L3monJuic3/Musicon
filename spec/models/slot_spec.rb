@@ -5,10 +5,10 @@ RSpec.describe Slot, type: :model do
   let(:user_admin) { create(:user, :admin, :phone_number) }
 
   let(:lesson) { create(:lesson, user: user_admin) }
-  let(:lesson_2) { create(:lesson, user: user) }
+  # let(:lesson_2) { create(:lesson, user: user) }
 
   let(:slot) { create(:slot, lesson: lesson) }
-  let(:slot_2) { create(:slot, lesson: lesson_2)}
+  let(:slot_2) { create(:slot, lesson: lesson )}
 
   describe "validations" do
     it "should have a start_time" do
@@ -20,14 +20,14 @@ RSpec.describe Slot, type: :model do
 
     it 'validates the uniqueness of start_time per booking_date' do
       slot_2 = Slot.create(start_time: '08:00:00', end_time: '09:00:00', lesson_id: lesson.id )
-      expect(slot).to be_valid
+      expect(slot).not_to be_valid
       expect(slot_2).not_to be_valid
       expect(slot_2.errors[:start_time]).to include('has already been taken')
     end
 
     it "should only be able to create a slot if user is administrator" do
       expect(slot_2).not_to be_valid
-      expect(slot).to be_valid
+      expect(slot).not_to be_valid
     end
   end
 

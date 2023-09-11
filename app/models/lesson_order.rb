@@ -3,9 +3,10 @@ class LessonOrder < ApplicationRecord
 
   belongs_to :user
   belongs_to :lesson
+  has_many :bookings
 
-
-  # validates :discount, presence: true
+  validates :discount, presence: true
+  validates :package, presence: true
   # validate :validate_custom_hidden_field
 
   # def self.validate_custom_hidden_field(custom_hidden_field)
