@@ -1,6 +1,6 @@
 class LessonOrdersController < ApplicationController
   # before_action :set_lesson, only: [:create, :show]
-
+  # after_action :authenticate_user!
   def index
     @lesson_orders = LessonOrder.all
     @lesson_order = LessonOrder.new
@@ -27,7 +27,6 @@ class LessonOrdersController < ApplicationController
     @lesson_order.lesson_id = @lesson.id
     current_user.subscribed = true if @lesson_order.is_subscribed == true
     current_user.save
-
     if @lesson_order.save
 
       redirect_to lessons_path

@@ -16,8 +16,9 @@ RSpec.describe Booking, type: :model do
   end
 
   describe "associations" do
-    it "should have many booking slots" do
-      should have_many(:booking_slots)
+    it "should have many slots through booking slots" do
+      # should have_many(:booking_slots)
+      should have_many(:slots).through(:booking_slots)
     end
   end
 

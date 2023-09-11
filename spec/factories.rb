@@ -30,8 +30,7 @@ FactoryBot.define do
   factory :lesson_order do
     discount { 20 }
     package { 10 }
-    association :user, factory: :user
-    association :lesson, factory: :lesson
+    association :user, factory: [:user, :lesson]
   end
 
   factory :booking do
