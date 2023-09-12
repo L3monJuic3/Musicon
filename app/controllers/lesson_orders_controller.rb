@@ -19,7 +19,8 @@ class LessonOrdersController < ApplicationController
   def create
     duration = params[:lesson_order][:custom_hidden_field]
 
-    @lesson = Lesson.where(duration: duration).first
+    # Will need to create some way to recognise the particular teacher
+    @lesson = Lesson.find_by(duration: duration)
     filtered_params = lesson_params.except(:custom_hidden_field)
     @lesson_order = LessonOrder.new(filtered_params)
 
@@ -36,7 +37,6 @@ class LessonOrdersController < ApplicationController
   end
 
   private
-
   def lesson_params
     params.require(:lesson_order).permit(:duration, :is_subscribed, :package, :custom_hidden_field)
   end

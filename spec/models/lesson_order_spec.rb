@@ -1,10 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe LessonOrder, type: :model do
-  let(:user) { create(:user) }
-  let(:user_admin) { create(:user, :admin, :phone_number) }
-  let(:lesson) { create(:lesson, user: user_admin) }
-  let(:lesson_order) { create(:lesson_order, user: user) }
 
   describe "validations" do
     it "should have a discount" do
