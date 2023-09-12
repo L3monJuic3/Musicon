@@ -31,12 +31,33 @@ RSpec.describe LessonOrdersController, type: :request do
         expect(response).to have_http_status(:success)
       end
     end
+
+    let(:plan) { @stripe_test_helper.create_plan(id: 'free', amount: 0) }
+    before(:each) do
+      PaymentServices::Stripe::Subscription::CreationService.(
+        user: guest,
+        account: admin.account,
+        lesson_order: lesson_order.id
+      )
+      admin.reload
+    end
+    it 'returns http success starter token' do
+      @stripe_test_helper.create_plan(id: 'starter', amount: 10)
+      cus =
+        Stripe::Customer
+        .retrieve(admin.account.subscription.stripe_customer_id)
+      card = cus.sources.create(source: @stripe_test_helper.generate_card_token)
+      admin.account.subscription.update(stripe_token: card.id)
+      get :show, params: {id: 'starter'}
+      expect(response).to have_http_status(:redirect)
+      expect(flash[:notice]).to eq 'Plan was updated successfully.'
+    end
   end
 
   describe "POST #create" do
     context "when user is signed in" do
       it "creates a new lesson order" do
-        expect { post lesson_orders_path, params: { lesson_order: lesson_order.attributes, lesson: lesson.attributes, user: guest.attributes } }.to change(Lesson, :count).by(1)
+        expect { post lesson_orders_path, params: { lesson_order: lesson_order.attributes, lesson: lesson.attributes, user: guest.attributes, } }.to change(LessonOrder, :count).by(1)
       end
 
       it "redirects to the checkout page if user signed in" do
@@ -47,7 +68,7 @@ RSpec.describe LessonOrdersController, type: :request do
 
     context "when the user is not signed in" do
       before do
-        sign_out user
+        sign_out guest
       end
 
       it "redirects to the sign_up page and saves the params in session" do
@@ -62,6 +83,13 @@ RSpec.describe LessonOrdersController, type: :request do
         # Check if the session contains the intended parameters
         expect(session[:lesson_order_params]).to eq(lesson_order.attributes)
         expect(response).to redirect_to(new_user_registration_path)
+      end
+    end
+
+    context "when stripe api has valid params" do
+      it "creates a new lesson order and redirects to new payments page" do
+        expect { post lesson_orders_path, params: { lesson_order: lesson_order.attributes, lesson: lesson.attributes, user: guest.attributes, } }.to change(LessonOrder, :count).by(1)
+
       end
     end
 
