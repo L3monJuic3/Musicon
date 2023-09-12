@@ -36,10 +36,7 @@ RSpec.describe LessonsController, type: :request do
   describe "POST #create" do
     context "with valid attributes" do
       it "creates a new lesson" do
-        expect {
-          post lessons_path, params: { lesson: lesson.attributes }
-        }.to change(Lesson, :count).by(1)
-        # puts response.body
+        expect { post lessons_path, params: { lesson: lesson.attributes } }.to change(Lesson, :count).by(1)
       end
       it "redirects back to the lesson's page" do
         post lessons_path, params: { lesson: lesson.attributes }
