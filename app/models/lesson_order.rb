@@ -1,7 +1,7 @@
 class LessonOrder < ApplicationRecord
   attr_accessor :custom_hidden_field
 
-  belongs_to :user
+  # belongs_to :user
   belongs_to :lesson
   has_many :bookings
 
@@ -13,4 +13,5 @@ class LessonOrder < ApplicationRecord
   #   # errors.add("custom_hidden_field", "is not valid") unless Lesson.exists?(duration: custom_hidden_field)
   # end
 
+  # belongs_to :student, class_name: 'User', foreign_key: 'user_id', inverse_of: :lesson_orders
 end

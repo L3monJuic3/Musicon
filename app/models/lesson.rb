@@ -22,20 +22,15 @@ class Lesson < ApplicationRecord
 
   def self.round_price(price)
     number_to_format = "%.2f" % price
-    # Add a leading zero if the number is less than 10.
     price < 10 ? "0#{number_to_format}" : number_to_format
-    # if price < 10
-    #   number_to_format = "0#{number_to_format}"
-    # end
-    # return number_to_format
   end
 
   private
 
-  def check_admin
-    unless current_user&.admin?
-      flash[:alert] = "Only admin users can perform this action."
-      redirect_to root_path # or wherever you want
-    end
-  end
+  # def check_admin
+  #   unless current_user&.admin?
+  #     flash[:alert] = "Only admin users can perform this action."
+  #     redirect_to root_path
+  #   end
+  # end
 end
