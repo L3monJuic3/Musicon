@@ -19,4 +19,8 @@ class User < ApplicationRecord
   def self.lesson_orders(user_id)
     LessonOrder.where(user_id: user_id)
   end
+
+  def role?
+    is_admin == true
+  end
 end

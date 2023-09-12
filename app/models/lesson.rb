@@ -10,8 +10,7 @@ class Lesson < ApplicationRecord
   validates :price, presence: true
   validates :duration, presence: true
 
-  # Custom validation for the creation by an admin
-  validate :created_by_admin
+  # validate :check_admin
 
   def self.lesson_duration
     " minutes"
@@ -33,7 +32,10 @@ class Lesson < ApplicationRecord
 
   private
 
-  def created_by_admin
-    errors.add(:base, "Only administrators can create lessons.") unless user&.is_admin?
+  def check_admin
+    unless current_user&.admin?
+      flash[:alert] = "Only admin users can perform this action."
+      redirect_to root_path # or wherever you want
+    end
   end
 end

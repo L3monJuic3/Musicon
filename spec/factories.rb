@@ -1,6 +1,6 @@
-# This will guess the User class
 require 'date'
 require 'faker'
+
 FactoryBot.define do
 
   factory :admin, class: "User" do
@@ -20,10 +20,9 @@ FactoryBot.define do
     password { "123456" }
     date_of_birth { Date.new }
     phone_number { "07397282826" }
-    is_admin { true }
+    is_admin { nil }
+    subscribed { false }
   end
-
-
 
   factory :lesson do
     name { Faker::ProgrammingLanguage.name  }
@@ -31,6 +30,14 @@ FactoryBot.define do
     price { 55.00 }
     duration { 60 }
     association :user, factory: :admin
+  end
+
+  factory :invalid_lesson, class: "Lesson" do
+    name { Faker::ProgrammingLanguage.name  }
+    description { "Intro lesson" }
+    price { 55.00 }
+    duration { 60 }
+    association :user, factory: :guest
   end
 
   factory :lesson_order do
@@ -53,19 +60,4 @@ FactoryBot.define do
     association :lesson
   end
 
-
-  # Invalid factory builds
-  factory :invalid_lesson, class: Lesson do
-    name { nil }
-    price { 521 }
-    duration { 1000 }
-    # other attributes that make it invalid
-  end
-
-  factory :lesson_no_admin, class: Lesson do
-    name { Faker::ProgrammingLanguage.name  }
-    description { "Intro lesson" }
-    price { 55.00 }
-    duration { 60 }
-  end
 end

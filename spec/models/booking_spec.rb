@@ -2,9 +2,7 @@ require 'rails_helper'
 require 'date'
 
 RSpec.describe Booking, type: :model do
-  let(:user) { create(:user) }
-  let(:lesson_order) { create(:lesson_order, user: user) }
-  let(:booking) { create(:booking, lesson_order: lesson_order) }
+  let(:booking) { create(:booking) }
 
   describe "validations" do
     it "should have a booking date" do
