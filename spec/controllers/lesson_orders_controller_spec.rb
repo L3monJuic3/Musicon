@@ -36,7 +36,7 @@ RSpec.describe LessonOrdersController, type: :request do
   describe "POST #create" do
     context "when user is signed in" do
       it "creates a new lesson order" do
-        expect { post lesson_orders_path, params: { lesson_order: lesson_order.attributes, lesson: lesson.attributes, user: guest.attributes } }.to change(Lesson, :count).by(1)
+        expect { post lesson_orders_path, params: { lesson_order: lesson_order.attributes, lesson: lesson.attributes, user: guest.attributes, } }.to change(LessonOrder, :count).by(1)
       end
 
       it "redirects to the checkout page if user signed in" do
@@ -47,7 +47,7 @@ RSpec.describe LessonOrdersController, type: :request do
 
     context "when the user is not signed in" do
       before do
-        sign_out user
+        sign_out guest
       end
 
       it "redirects to the sign_up page and saves the params in session" do
