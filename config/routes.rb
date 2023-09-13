@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :lessons
   resources :lesson_orders
+  resources :lessons
   resources :bookings
-
 end
