@@ -59,8 +59,8 @@ until i == 23
 end
 
 
-lesson = Lesson.create(
-  name: 'Lesson 1',
+lesson = Lesson.create!(
+  name: 'Lesson 55',
   description: 'Perfect to get to know the teacher and try it out at low cost',
   duration: 90,
   price: 20,
@@ -69,11 +69,13 @@ lesson = Lesson.create(
 
 
 
-LessonOrder.create(
+LessonOrder.create!(
 user_id: user_one.id,
 lesson_id: lesson.id,
+discount: 20,
 package: 1
 )
+
 
 LessonOrder.create(
   user_id: user_one.id,

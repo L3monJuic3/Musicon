@@ -25,8 +25,6 @@ class Lesson < ApplicationRecord
     price < 10 ? "0#{number_to_format}" : number_to_format
   end
 
-  private
-
   # def check_admin
   #   unless current_user&.admin?
   #     flash[:alert] = "Only admin users can perform this action."
