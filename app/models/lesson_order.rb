@@ -14,8 +14,8 @@ class LessonOrder < ApplicationRecord
   # end
 
   # belongs_to :student, class_name: 'User', foreign_key: 'user_id', inverse_of: :lesson_orders
-
-  def find_user_by_id(user_id)
+  monetize :amount_cents
+  def find_username_by_id(user_id)
     User.find(user_id).first_name
   end
 end

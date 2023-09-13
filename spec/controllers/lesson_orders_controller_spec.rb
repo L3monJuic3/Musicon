@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'stripe_mock'
 RSpec.describe LessonOrdersController, type: :request do
   let(:admin) { create(:admin) }
   let(:guest) { create(:guest) }
@@ -10,12 +11,12 @@ RSpec.describe LessonOrdersController, type: :request do
 
   before do
     sign_in guest
-    # StripeMock.start
+    StripeMock.start
   end
 
-  # after do
-  #   StripeMock.stop
-  # end
+  after do
+    StripeMock.stop
+  end
 
   describe "GET #index" do
     it "should return a succesful http response" do
@@ -64,22 +65,53 @@ RSpec.describe LessonOrdersController, type: :request do
         expect(response).to redirect_to(new_user_registration_path)
       end
     end
+  end
 
 
-    context "stripe API" do
-      let(:stripe_helper) { StripeMock.create_test_helper }
+  context "stripe API" do
+    let(:stripe_helper) { StripeMock.create_test_helper }
+    let(:stripe_product) { stripe_helper.create_product(name: "My Product",
+      price: 1000,
+      description: "This is a test product") }
 
-      describe "POST #checkout" do
-        it "simulates creating a checkout session" do
-          product = stripe_helper.create_product(name: lesson_order.lesson_name)
-          price = Stripe::Price.create(product: product.id, unit_amount: 1000, currency: 'usd')
-        end
 
-        # Create the checkout session
-        checkout_session = Stripe::Checkout::Session.create(
+    describe "POST #checkout" do
+      it "creates a Stripe product" do
+        # stripe_product = stripe_product(params[:name] = "Ethan")
+        expect(stripe_product).not_to be_nil
+      end
 
-        )
+      it "creates a Stripe price" do
+        stripe_price = Stripe::Price.create(product: stripe_product.id, unit_amount: lesson_order.amount, currency: lesson_order.currency)
+        expect(stripe_price).not_to be_nil
+      end
 
+      it "creates a stripe checkout session with an associated lesson order" do
+        stripe_price = Stripe::Price.create(product: stripe_product.id, unit_amount: lesson_order.amount, currency: lesson_order.currency)
+
+
+      # Create the checkout session for the lesson_order
+      checkout_session = Stripe::Checkout::Session.create(
+        line_items: [{
+          price_data: {
+            currency: 'usd',
+            unit_amount: ((lesson.price * lesson_order.package) * 100).to_i,
+            product_data: {
+              name: "Your lesson",
+              description: "Lessons",
+              images: [''],
+            },
+          },
+          quantity: 1,
+        }],
+        mode: 'payment',
+        success_url: "http://localhost:3000/",
+        cancel_url: "http://localhost:3000/"
+      )
+
+      lesson_order.update(stripe_session_id: checkout_session.id)
+      expect(lesson_order.stripe_session_id).to eq(checkout_session.id)
+      expect(checkout_session.line_items.data.first.price_data.unit_amount).to eq(((lesson.price * lesson_order.package) * 100).to_i)
       end
     end
   end

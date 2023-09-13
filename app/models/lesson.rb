@@ -10,6 +10,8 @@ class Lesson < ApplicationRecord
   validates :price, presence: true
   validates :duration, presence: true
 
+
+  monetize :price_cents
   # validate :check_admin
 
   def self.lesson_duration
