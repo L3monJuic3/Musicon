@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   resources :lessons
-  resources :lesson_orders
+  resources :lesson_orders do
+    resources :payments, only: :new
+  end
   resources :bookings
 
 end
