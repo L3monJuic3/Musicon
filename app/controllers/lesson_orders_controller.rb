@@ -38,6 +38,9 @@ class LessonOrdersController < ApplicationController
     end
   end
 
+  def checkout
+  end
+
   private
 
   def lesson_params
