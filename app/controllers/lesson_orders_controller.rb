@@ -24,6 +24,7 @@ class LessonOrdersController < ApplicationController
     @lesson = Lesson.find_by(duration: duration)
     filtered_params = lesson_params.except(:custom_hidden_field)
     @lesson_order = LessonOrder.new(filtered_params)
+    @lesson_order.amount_cents = (@lesson.price * @lesson_order.package) * 100
 
     @lesson_order.user_id = current_user.id
     @lesson.present? ? @lesson_order.lesson_id = @lesson.id : @lesson_order.lesson_id = Lesson.first.id
@@ -39,6 +40,26 @@ class LessonOrdersController < ApplicationController
   end
 
   def checkout
+    @order = LessonOrder.find(params[:id])
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: [[
+        price_data: {
+          currency: "usd",
+          unit_amount: (@order.amount_cents).to_i,
+          product_data: {
+            name: 'Your lessons',
+            description: "very nice",
+            images: ['https://example.com/t-shirt.png'],
+          },
+        },
+        quantity: 1
+      ]],
+      mode: 'payment',
+      success_url: "http://localhost:3000/lesson_order/#{@order.id}/confirmation"
+      cancel_url: "http://localhost:3000/lesson_order/#{@order.id}/checkout"
+    )
+    @order.update(checkout_session_id: session.id)
   end
 
   private
