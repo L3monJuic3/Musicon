@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_11_104223) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_13_143228) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,6 +38,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_104223) do
     t.integer "package"
     t.boolean "is_subscribed"
     t.integer "discount"
+    t.integer "amount_cents"
+    t.string "checkout_session_id"
     t.index ["lesson_id"], name: "index_lesson_orders_on_lesson_id"
     t.index ["user_id"], name: "index_lesson_orders_on_user_id"
   end
@@ -53,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_11_104223) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "duration"
+    t.integer "price_cents", default: 0, null: false
     t.index ["user_id"], name: "index_lessons_on_user_id"
   end
 

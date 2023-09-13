@@ -10,6 +10,8 @@ class Lesson < ApplicationRecord
   validates :price, presence: true
   validates :duration, presence: true
 
+
+  monetize :price_cents
   # validate :check_admin
 
   def self.lesson_duration
@@ -24,8 +26,6 @@ class Lesson < ApplicationRecord
     number_to_format = "%.2f" % price
     price < 10 ? "0#{number_to_format}" : number_to_format
   end
-
-  private
 
   # def check_admin
   #   unless current_user&.admin?
