@@ -64,6 +64,7 @@ lesson = Lesson.create!(
   description: 'Perfect to get to know the teacher and try it out at low cost',
   duration: 90,
   price: 20,
+  price_cents: (lesson.price * 100).to_i,
   user_id: user_one.id
 )
 
@@ -77,27 +78,31 @@ package: 1
 )
 
 
-LessonOrder.create(
+LessonOrder.create!(
   user_id: user_one.id,
   lesson_id: lesson.id,
+  discount: 20,
   package: 5
 )
 
 
-LessonOrder.create(
+LessonOrder.create!(
   user_id: user_one.id,
   lesson_id: lesson.id,
+  discount: 20,
   package: 10
 )
 
-LessonOrder.create(
+LessonOrder.create!(
   user_id: user_one.id,
   lesson_id: lesson.id,
+  discount: 20,
   package: 20
 )
 
-LessonOrder.create(
+LessonOrder.create!(
   user_id: user_one.id,
   lesson_id: lesson.id,
+  discount: 20,
   package: 40
 )
