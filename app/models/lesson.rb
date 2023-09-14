@@ -7,11 +7,11 @@ class Lesson < ApplicationRecord
   # Validations
   validates :name, presence: true, uniqueness: { scope: :user_id, message: "lesson name must be unique within the same user" }
   validates :description, presence: true
-  validates :price, presence: true
+  validates :price_cents, presence: true
   validates :duration, presence: true
 
 
-  monetize :price_cents
+  # monetize :price_cents
   # validate :check_admin
 
   def self.lesson_duration

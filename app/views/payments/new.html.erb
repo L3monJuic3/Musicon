@@ -1,21 +1,20 @@
 <div class="container">
   <div class="row py-4">
-    <div class="col-md-3"><%= image_tag @lesson_order.find_username_by_id(@lesson_order.user_id).photo_url, width: '100%' %></div>
+    <%# <div class="col-md-3"><%= image_tag @lesson_order.find_username_by_id(@lesson_order.user_id).photo_url, width: '100%'</div> %>
     <div class="col">
       <h1>Checkout summary</h1>
-      <p>Purchase of <strong><%= @lesson_order.find_username_by_id(@lesson_order.user_id).name %></strong> for <strong><%= humanized_money_with_symbol @lesson_order.amount %></strong></p>
+      <p>Purchase of <strong><%= @lesson_order.find_username_by_id(@lesson_order.user_id).first_name %></strong> for <strong><%= humanized_money_with_symbol @lesson_order.amount_cents / 100 %></strong></p>
       <button id="pay" class="btn btn-primary">Pay</button>
-      <!-- # Commented for the lecture, remove comments.
       <script src="https://js.stripe.com/v3/"></script>
       <script>
         const paymentButton = document.getElementById('pay');
         paymentButton.addEventListener('click', () => {
           const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
           stripe.redirectToCheckout({
-            sessionId: '<%= @order.checkout_session_id %>'
+            sessionId: '<%= @lesson_order.checkout_session_id %>'
           });
         });
-      </script> -->
+      </script>
     </div>
   </div>
 </div>

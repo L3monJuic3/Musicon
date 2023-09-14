@@ -14,8 +14,20 @@ class LessonOrder < ApplicationRecord
   # end
 
   # belongs_to :student, class_name: 'User', foreign_key: 'user_id', inverse_of: :lesson_orders
-  monetize :amount_cents
+  # monetize :amount_cents
   def find_username_by_id(user_id)
     User.find(user_id)
+  end
+
+  def self.discount_cal(package)
+    if package >= 20
+      0.80
+    elsif package < 20
+      0.75
+    elsif package <= 10
+      0.80
+    else
+      0.85
+    end
   end
 end
