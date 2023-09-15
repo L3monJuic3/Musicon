@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   
   resources :lesson_orders do
     resources :payments, only: :new
+    resources :bookings
   end
   
   resources :bookings
