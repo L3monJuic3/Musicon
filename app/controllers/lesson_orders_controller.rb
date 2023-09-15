@@ -57,14 +57,13 @@ class LessonOrdersController < ApplicationController
         quantity: 1
       ]],
       mode: 'payment',
-      success_url: "http://localhost:3000/lesson_order/#{lesson_order.id}/confirmation",
-      cancel_url: "http://localhost:3000/lesson_order/#{lesson_order.id}/checkout",
+      success_url: "http://localhost:3000/lesson_orders/#{lesson_order.id}/bookings",
+      cancel_url: "http://localhost:3000/lesson_orders/#{lesson_order.id}/checkout",
     )
     lesson_order.update(checkout_session_id: session.id)
     lesson_order.update(state: "pending")
     redirect_to new_lesson_order_payment_path(lesson_order)
   end
-
   private
 
   def lesson_params

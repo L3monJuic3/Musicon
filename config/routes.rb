@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :lessons
   resources :lesson_orders do
     resources :payments, only: :new
+    resources :bookings
   end
   resources :bookings
 

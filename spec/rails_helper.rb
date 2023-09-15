@@ -1,3 +1,5 @@
+require "simplecov"
+SimpleCov.start "rails"
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 
 # Previous content of test helper now starts here

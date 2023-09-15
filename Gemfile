@@ -80,11 +80,12 @@ group :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'rails-controller-testing'
+  gem 'simplecov'
 end
 
 group :development, :test do
   gem 'factory_bot_rails'
-  gem 'simplecov', require: false, group: :test
+
 end
 # Stripe api
 gem 'money-rails'
